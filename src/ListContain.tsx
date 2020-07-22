@@ -1,13 +1,13 @@
-import React, { useState, useReducer, useRef } from 'react';
-import { strict } from 'assert';
+import React, { useState, useRef } from 'react';
+import './ListContain.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
-export const ListContain: React.FC = ({}) => {
+const ListContain: React.FC = ({}) => {
     
-    const[list, setList] = useState(Array);
-    const[tempList, setTempList] = useState();
+    const[list, setList]: [any,any] = useState([]);
+    const[tempList, setTempList]: [any,any] = useState();
     const inputRef = useRef<HTMLInputElement>(null);
 
     let handleOnChangeEvent = (e: any) => {
@@ -16,13 +16,13 @@ export const ListContain: React.FC = ({}) => {
     }
     let handleOnSubmitEvent = (e:any) =>{
         e.preventDefault();
-        const newList = [setList, setTempList]
-
+        const newList = [...list, tempList]
         setList(newList);
+        setTempList('');
     }
-    let removeItem = (value:string) => {
+    let removeItem = (value: any) => {
         
-        let alist = list.filter(item => item !== value)              
+        let alist = list.filter((item: any) => item !== value)              
         setList(alist);
     }
     return(
@@ -42,13 +42,13 @@ export const ListContain: React.FC = ({}) => {
                     </form>
                 </div>
                 <div>
-                {setList.map(nlist => (
-                        <p className="generatedList" key={nlist}>{nlist}
+                {list.map((nlist: string, index: any) => (
+                        <p className="generatedList" key={index} >{nlist}
 
                             <FontAwesomeIcon
                                 className="faicons"
                                 icon={faTrash}
-                                onClick={}
+                                onClick={() =>removeItem(nlist)}
                             />
                         </p>
                     ))}
@@ -63,3 +63,4 @@ export const ListContain: React.FC = ({}) => {
     
 
 }
+export default ListContain;
