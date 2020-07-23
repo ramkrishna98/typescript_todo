@@ -7,8 +7,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const ListContain: React.FC = ({}) => {
     
     const[list, setList]: [any,any] = useState([]);
-    const[tempList, setTempList]: [any,any] = useState();
+    const[tempList, setTempList]: [any,any] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
     let handleOnChangeEvent = (e: any) => {
         setTempList(e.target.value);
@@ -34,11 +35,12 @@ const ListContain: React.FC = ({}) => {
                             <input
                                 className="inputBox"
                                 ref = {inputRef}
+                                value= {tempList}
                                 onChange={(e) => handleOnChangeEvent(e)}
                                 placeholder="Type...">
                             </input>
                         </div>
-                        <button className="buttonBox" type='submit'>Add</button>
+                        <button className="buttonBox" ref = {buttonRef} type='submit'>Add</button>
                     </form>
                 </div>
                 <div>
